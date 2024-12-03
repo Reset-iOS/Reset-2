@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23090" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="w2V-eu-xD9">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23079"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController id="Y6W-OH-hqX" customClass="ViewController" customModule="Reset" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="puZ-Ub-EdW">
+                                <rect key="frame" x="136.33333333333334" y="703.66666666666663" width="120.33333333333334" height="34.333333333333371"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Add Support">
+                                    <backgroundConfiguration key="background" cornerRadius="20"/>
+                                </buttonConfiguration>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite Your Support Network to Cheer You On and Stay Connected." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcT-RH-G5j">
+                                <rect key="frame" x="44" y="385.66666666666669" width="305" height="81"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="81" id="DFG-If-kIv"/>
+                                    <constraint firstAttribute="width" constant="305" id="IXH-0R-o9A"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="puZ-Ub-EdW" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="136.33000000000001" id="5Nw-lw-miY"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="puZ-Ub-EdW" secondAttribute="bottom" constant="80" id="G0Q-cx-IDi"/>
+                            <constraint firstItem="gcT-RH-G5j" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="lXh-Ul-NQU"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="puZ-Ub-EdW" secondAttribute="trailing" constant="136.33000000000001" id="mn5-79-pIz"/>
+                            <constraint firstItem="gcT-RH-G5j" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="nba-iO-yqj"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="SFD-bc-9mx"/>
+                    <connections>
+                        <outlet property="addSupportButton" destination="puZ-Ub-EdW" id="AmT-6e-PE4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="902" y="27"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="l7W-zn-0rs">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="w2V-eu-xD9" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="4sT-RZ-Re8">
+                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <navigationBarAppearance key="scrollEdgeAppearance" backgroundEffect="systemUltraThinMaterial"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="mwc-OJ-s5x"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XSD-9G-ch5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-181" y="27"/>
+        </scene>
+    </scenes>
+</document>
