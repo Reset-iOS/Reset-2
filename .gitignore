@@ -1,0 +1,61 @@
+# Xcode
+.DS_Store
+build/
+DerivedData/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+
+# Swift Package Manager
+.build/
+
+# CocoaPods
+Pods/
+*.xcworkspace
+!default.xcworkspace
+*.xcproject
+!default.xcproject
+
+# Carthage
+Carthage/Build/
+
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+
+# Code coverage
+*.gcno
+*.gcda
+
+# Other
+.idea/
+*.hmap
+*.xccheckout
+*.xcscmblueprint
+*.xcscheme
+*.xcuserstate
+*.xcworkspace
+*.xcworkspacedata
+*.xcodeproj
+*.xcassets
+*.xcconfig
+*.xcfilelist
+*.xcsettings
+*.xcuserdata
+*.xcscmblueprint
+*.xcscheme
+*.xcuserstate
+*.xcworkspace
+*.xcodeproj
+*.xcassets
+*.xcconfig
+*.xcfilelist
+*.xcsettings
+*.xcuserdata
