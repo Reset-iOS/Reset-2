@@ -86,4 +86,17 @@ class ContactsViewController: UITableViewController, UISearchResultsUpdating, UI
                 
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let storyboard = UIStoryboard(name: "Detail", bundle: nil)
+        // Instantiate DetailViewController from the storyboard
+        let detailVC = storyboard.instantiateViewController(identifier: "Detail") as! DetailViewController
+        let user = filteredContacts[indexPath.row]
+        detailVC.contact = user
+        
+        // Push DetailViewController onto the navigation stack
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
 }

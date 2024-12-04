@@ -21,6 +21,9 @@
                                 <buttonConfiguration key="configuration" style="filled" title="Add Support">
                                     <backgroundConfiguration key="background" cornerRadius="20"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <segue destination="EJY-0O-5fK" kind="push" id="0dh-lo-vzD"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite Your Support Network to Cheer You On and Stay Connected." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcT-RH-G5j">
                                 <rect key="frame" x="44" y="385.66666666666669" width="305" height="81"/>
@@ -34,12 +37,10 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="puZ-Ub-EdW" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="136.33000000000001" id="5Nw-lw-miY"/>
+                            <constraint firstItem="puZ-Ub-EdW" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="0Os-SX-MAR"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="puZ-Ub-EdW" secondAttribute="bottom" constant="80" id="G0Q-cx-IDi"/>
                             <constraint firstItem="gcT-RH-G5j" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="lXh-Ul-NQU"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="puZ-Ub-EdW" secondAttribute="trailing" constant="136.33000000000001" id="mn5-79-pIz"/>
                             <constraint firstItem="gcT-RH-G5j" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="nba-iO-yqj"/>
                         </constraints>
                     </view>
@@ -51,6 +52,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="902" y="27"/>
+        </scene>
+        <!--Search-->
+        <scene sceneID="LvC-ff-Dgh">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Search" referencedIdentifier="Search" id="EJY-0O-5fK" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="8dZ-Sg-ONn"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eWq-NI-wP4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1897" y="36"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="l7W-zn-0rs">
