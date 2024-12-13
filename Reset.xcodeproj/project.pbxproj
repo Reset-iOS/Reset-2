@@ -6,8 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		40B840242CFCE826000B80C0 /* ProgressMedalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B840232CFCE826000B80C0 /* ProgressMedalCollectionViewCell.swift */; };
+		40B840262CFE1E64000B80C0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B840252CFE1E64000B80C0 /* HomeViewController.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		2F3F5A2F2CF73ADA00BE954B /* Reset.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reset.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		40B840232CFCE826000B80C0 /* ProgressMedalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressMedalCollectionViewCell.swift; sourceTree = "<group>"; };
+		40B840252CFE1E64000B80C0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -59,6 +66,8 @@
 		2F3F5A262CF73ADA00BE954B = {
 			isa = PBXGroup;
 			children = (
+				40B840252CFE1E64000B80C0 /* HomeViewController.swift */,
+				40B840232CFCE826000B80C0 /* ProgressMedalCollectionViewCell.swift */,
 				2F3F5A312CF73ADA00BE954B /* Reset */,
 				2F3F5A302CF73ADA00BE954B /* Products */,
 			);
@@ -146,6 +155,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40B840262CFE1E64000B80C0 /* HomeViewController.swift in Sources */,
+				40B840242CFCE826000B80C0 /* ProgressMedalCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
