@@ -8,6 +8,18 @@
 import Foundation
 import UIKit
 
-class Model:NSObject{
-    var images : [UIImage] = [UIImage(named: "Emily")!,UIImage(named: "Emily")!,UIImage(named: "Emily")!,UIImage(named: "Emily")!,UIImage(named: "Emily")!,UIImage(named: "Emily")!,UIImage(named: "Emily")!]
+enum CanvasItem {
+    case image(UIImage)
+    case text(String)
 }
+
+class Model: NSObject {
+    var items: [CanvasItem] = [
+        .image(UIImage(named: "Emily")!),
+        .text("Sample text 1"),
+        .image(UIImage(named: "Emily")!),
+        .text("Sample text 2"),
+        .image(UIImage(named: "Emily")!)
+    ]
+}
+

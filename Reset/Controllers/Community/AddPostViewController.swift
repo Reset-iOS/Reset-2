@@ -1,13 +1,13 @@
 //
-//  CommunitySpacesViewController.swift
+//  AddPostViewController.swift
 //  Reset
 //
-//  Created by Prasanjit Panda on 04/12/24.
+//  Created by Prasanjit Panda on 13/12/24.
 //
 
 import UIKit
 
-class CommunitySpacesViewController: UIViewController {
+class AddPostViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

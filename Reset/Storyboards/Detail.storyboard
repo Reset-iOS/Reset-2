@@ -35,7 +35,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Add Sponsor" cornerStyle="capsule"/>
                                 <connections>
-                                    <action selector="addSupportMember:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="jCK-oB-Buv"/>
+                                    <action selector="addSupportMember:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="aKt-EP-bar"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Uov-CJ-irT">

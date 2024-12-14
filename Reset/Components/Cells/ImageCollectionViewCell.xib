@@ -23,12 +23,22 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eHz-yA-3tq">
                                 <rect key="frame" x="0.0" y="0.0" width="269" height="109"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iIk-Dd-FSV">
+                                <rect key="frame" x="215.33333333333334" y="4" width="49.666666666666657" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="minus.circle.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="deleteItem:" destination="gTV-IL-0wX" eventType="touchUpInside" id="xnM-PM-eEe"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="eHz-yA-3tq" secondAttribute="trailing" id="2Lb-SL-Hn5"/>
                             <constraint firstAttribute="bottom" secondItem="eHz-yA-3tq" secondAttribute="bottom" id="2cO-QC-y9l"/>
                             <constraint firstItem="eHz-yA-3tq" firstAttribute="top" secondItem="qnw-Zk-mrU" secondAttribute="top" id="DCC-aI-tpe"/>
+                            <constraint firstAttribute="trailing" secondItem="iIk-Dd-FSV" secondAttribute="trailing" constant="4" id="fNO-BE-mOo"/>
+                            <constraint firstItem="iIk-Dd-FSV" firstAttribute="top" secondItem="qnw-Zk-mrU" secondAttribute="top" constant="4" id="miq-jY-Kzb"/>
                             <constraint firstItem="eHz-yA-3tq" firstAttribute="leading" secondItem="qnw-Zk-mrU" secondAttribute="leading" id="ueh-Ou-HWg"/>
                         </constraints>
                     </view>
@@ -43,6 +53,7 @@
             </constraints>
             <size key="customSize" width="269" height="109"/>
             <connections>
+                <outlet property="deleteButton" destination="iIk-Dd-FSV" id="JsV-tK-vgE"/>
                 <outlet property="image" destination="eHz-yA-3tq" id="iRK-0t-cYs"/>
                 <outlet property="view" destination="qnw-Zk-mrU" id="bha-6G-fU8"/>
             </connections>
@@ -50,6 +61,7 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="minus.circle.fill" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

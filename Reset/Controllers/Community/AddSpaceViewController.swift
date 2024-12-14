@@ -1,13 +1,13 @@
 //
-//  CommunityPostsViewController.swift
+//  AddSpaceViewController.swift
 //  Reset
 //
-//  Created by Prasanjit Panda on 04/12/24.
+//  Created by Prasanjit Panda on 14/12/24.
 //
 
 import UIKit
 
-class CommunityPostsViewController: UIViewController {
+class AddSpaceViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

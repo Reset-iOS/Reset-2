@@ -41,7 +41,17 @@ class DetailViewController: UIViewController {
     }
     
 
-    @IBAction func addSupportMember(_ sender: Any) {
+    @IBAction func addSupportMember(_ sender: UIButton) {
+        guard let contact = contact else { return }
+            
+        // Add the contact to the support array
+        ContactManager.shared.support.append(contact)
+        print(ContactManager.shared.support)
+            
+        if let supportVC = navigationController?.viewControllers.first(where: { $0 is SupportViewController }) {
+                // Pop to SupportViewController and remove all other view controllers
+                navigationController?.popToViewController(supportVC, animated: true)
+        }
     }
     /*
     // MARK: - Navigation

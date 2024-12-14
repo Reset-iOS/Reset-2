@@ -14,41 +14,20 @@ class CommunityViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        // Create and configure the segmented control
+        let segmentedControl = UISegmentedControl(items: ["Posts", "Spaces"])
+        segmentedControl.selectedSegmentIndex = 0  // Default segment
+        segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
 
-        // Step 1: Create the Title and Subtitle
-            let titleLabel = UILabel()
-            titleLabel.text = "Summary"
-            titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
-            titleLabel.textColor = .black
-
-            let subtitleLabel = UILabel()
-            subtitleLabel.text = "Friday 22 Nov"
-            subtitleLabel.font = UIFont.systemFont(ofSize: 14)
-            subtitleLabel.textColor = .gray
-
-            // Stack View for Title and Subtitle
-            let titleStackView = UIStackView(arrangedSubviews: [subtitleLabel, titleLabel])
-            titleStackView.axis = .vertical
-            titleStackView.spacing = 0
-            titleStackView.alignment = .leading
-
-            
-
-            // Step 2: Add the Profile Image
-            let profileImage = UIImageView(image: UIImage(named: "Emily"))
-            profileImage.contentMode = .scaleAspectFill
-            profileImage.layer.cornerRadius = 20 // Circular image
-            profileImage.clipsToBounds = true
-            profileImage.translatesAutoresizingMaskIntoConstraints = false
-            profileImage.widthAnchor.constraint(equalToConstant: 40).isActive = true
-            profileImage.heightAnchor.constraint(equalToConstant: 40).isActive = true
-
-            // Wrap the image in a UIBarButtonItem
-            let profileButton = UIBarButtonItem(customView: profileImage)
-
-            // Add the profile image to the right side of the navigation bar
-            navigationItem.rightBarButtonItem = profileButton
-            
+        // Add the segmented control as a UIBarButtonItem
+        navigationItem.titleView = segmentedControl
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
+        
+        segmentedControlValueChanged(segmentedControl)
+        
+        
     }
     
     @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
@@ -87,6 +66,22 @@ class CommunityViewController: UIViewController {
         // Update the current child reference
         currentChildViewController = newVC
     }
+    
+    @objc func addButtonTapped() {
+           // Check which segment is selected and show the appropriate view controller
+           switch (navigationItem.titleView as? UISegmentedControl)?.selectedSegmentIndex {
+           case 0:
+               // Show the view controller for "Community Posts"
+               let newVC = storyboard?.instantiateViewController(withIdentifier: "AddPostViewController")
+               navigationController?.pushViewController(newVC!, animated: true)
+           case 1:
+               // Show the view controller for "Community Spaces"
+               let newVC = storyboard?.instantiateViewController(withIdentifier: "AddSpaceViewController")
+               navigationController?.pushViewController(newVC!, animated: true)
+           default:
+               break
+           }
+       }
     
 
     /*

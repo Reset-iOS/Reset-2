@@ -28,6 +28,8 @@ class ContactManager {
         Contact(name: "Sarah Miller", phone: "555-6789", email: "sarah.miller@example.com",profile: "Emily")
     ]
     
+    var support: [Contact] = []
+    
     func searchContacts(with searchText: String) -> [Contact] {
         guard !searchText.isEmpty else { return contacts }
         

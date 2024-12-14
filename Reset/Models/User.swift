@@ -22,3 +22,7 @@ struct User: Codable {
     var sponsorID: UUID?
     var friends: [UUID]
 }
+
+
+
+
