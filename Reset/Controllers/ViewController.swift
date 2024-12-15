@@ -21,10 +21,15 @@ class ViewController: UIViewController, UICollectionViewDataSource {
     
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         collectionView.dataSource = self
         collectionView.delegate = self
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+//        collectionView.dataSource = self
+//        collectionView.delegate = self
         // Do any additional setup after loading the view.
     }
     @objc func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

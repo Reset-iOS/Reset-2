@@ -89,6 +89,7 @@ class SupportViewController: UIViewController,UICollectionViewDelegate,UICollect
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = ChatViewController()
+        vc.user = ContactManager.shared.support[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
     /*

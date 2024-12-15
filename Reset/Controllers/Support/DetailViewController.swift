@@ -36,6 +36,7 @@ class DetailViewController: UIViewController {
         nameAndAgeLabel.text = "\(contact!.name)"
         
         navigationItem.title = "\(contact!.name)"
+        
 
         // Do any additional setup after loading the view.
     }

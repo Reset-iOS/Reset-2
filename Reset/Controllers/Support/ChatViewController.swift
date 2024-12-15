@@ -7,6 +7,7 @@
 
 import UIKit
 import MessageKit
+import InputBarAccessoryView
 
 struct Sender: SenderType {
     var displayName: String
@@ -21,11 +22,9 @@ struct Message: MessageType {
     
 }
 
-class ChatViewController: MessagesViewController, MessagesDataSource,MessagesLayoutDelegate,MessagesDisplayDelegate {
+class ChatViewController: MessagesViewController, MessagesDataSource,MessagesLayoutDelegate,MessagesDisplayDelegate,InputBarAccessoryViewDelegate {
     
-    
-    
-    
+    var user:Contact?
     var currentUser: Sender = Sender(displayName: "Emily", senderId: "self")
     var otherUser: Sender = Sender(displayName: "John Doe", senderId: "other")
     
@@ -64,9 +63,24 @@ class ChatViewController: MessagesViewController, MessagesDataSource,MessagesLay
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
+        messageInputBar.delegate = self
         messagesCollectionView.reloadData()
         
+        title = user?.name
+        
+        
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func dismissKeyboard() {
+            view.endEditing(true) // Dismiss the keyboard
     }
     
     var currentSender: SenderType {
@@ -92,5 +106,16 @@ class ChatViewController: MessagesViewController, MessagesDataSource,MessagesLay
         // Pass the selected object to the new view controller.
     }
     */
+    func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
+        let message = Message(sender: currentSender, messageId: UUID().uuidString,
+                              sentDate: Date(),
+                              kind: .text(text))
+        print("Pressed Send")
+        messages.append(message)
+        messagesCollectionView.reloadData()
+        messagesCollectionView.scrollToLastItem(animated: true)
+        inputBar.inputTextView.text = ""
+    }
+
 
 }
