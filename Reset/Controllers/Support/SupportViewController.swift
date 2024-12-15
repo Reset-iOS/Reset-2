@@ -88,7 +88,8 @@ class SupportViewController: UIViewController,UICollectionViewDelegate,UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Selected \(support[indexPath.row].name)")
+        let vc = ChatViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     /*
     // MARK: - Navigation

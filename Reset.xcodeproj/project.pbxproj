@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2F8D88C02CFF56FE0013EFD4 /* CHTCollectionViewWaterfallLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 2F8D88BF2CFF56FE0013EFD4 /* CHTCollectionViewWaterfallLayout */; };
 		2F8D88C22CFF56FE0013EFD4 /* CHTCollectionViewWaterfallLayoutObjC in Frameworks */ = {isa = PBXBuildFile; productRef = 2F8D88C12CFF56FE0013EFD4 /* CHTCollectionViewWaterfallLayoutObjC */; };
+		2FF5CB662D0EBF8700966D33 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2FF5CB652D0EBF8700966D33 /* MessageKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FF5CB662D0EBF8700966D33 /* MessageKit in Frameworks */,
 				2F8D88C22CFF56FE0013EFD4 /* CHTCollectionViewWaterfallLayoutObjC in Frameworks */,
 				2F8D88C02CFF56FE0013EFD4 /* CHTCollectionViewWaterfallLayout in Frameworks */,
 			);
@@ -101,6 +103,7 @@
 			packageProductDependencies = (
 				2F8D88BF2CFF56FE0013EFD4 /* CHTCollectionViewWaterfallLayout */,
 				2F8D88C12CFF56FE0013EFD4 /* CHTCollectionViewWaterfallLayoutObjC */,
+				2FF5CB652D0EBF8700966D33 /* MessageKit */,
 			);
 			productName = Reset;
 			productReference = 2F3F5A2F2CF73ADA00BE954B /* Reset.app */;
@@ -132,6 +135,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				2F8D88BE2CFF56FE0013EFD4 /* XCRemoteSwiftPackageReference "CHTCollectionViewWaterfallLayout" */,
+				2FF5CB642D0EBF8700966D33 /* XCRemoteSwiftPackageReference "MessageKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2F3F5A302CF73ADA00BE954B /* Products */;
@@ -371,6 +375,14 @@
 				minimumVersion = 0.9.10;
 			};
 		};
+		2FF5CB642D0EBF8700966D33 /* XCRemoteSwiftPackageReference "MessageKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MessageKit/MessageKit";
+			requirement = {
+				kind = exactVersion;
+				version = 4.3.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -383,6 +395,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2F8D88BE2CFF56FE0013EFD4 /* XCRemoteSwiftPackageReference "CHTCollectionViewWaterfallLayout" */;
 			productName = CHTCollectionViewWaterfallLayoutObjC;
+		};
+		2FF5CB652D0EBF8700966D33 /* MessageKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2FF5CB642D0EBF8700966D33 /* XCRemoteSwiftPackageReference "MessageKit" */;
+			productName = MessageKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
