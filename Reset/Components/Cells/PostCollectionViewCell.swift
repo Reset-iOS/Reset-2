@@ -47,12 +47,29 @@ class PostCollectionViewCell: UICollectionViewCell {
        likesCount.text = "\(post.likesCount)"
        commentsCount.text = "\(post.commentsCount)"
        
-       // Handling post image
-       if let postImageName = post.postImageName {
-           postImage.image = UIImage(named: postImageName)
-           postImage.isHidden = false  // Show the image view if there's an image
-       } else {
-           postImage.isHidden = true  // Hide the image view if no image
-       }
+        // Handle post image
+        if let postImagePath = post.postImageName {
+            // Check if the path is a file path or asset name
+            if FileManager.default.fileExists(atPath: postImagePath) {
+                // Load image from disk
+                if let postImageContent = FileManagerHelper.loadImageFromDisk(filePath: postImagePath) {
+                    postImage.image = UIImage(contentsOfFile: postImagePath)
+                    postImage.isHidden = false
+                } else {
+                    postImage.isHidden = true
+                }
+            } else {
+                // Attempt to load from assets
+                if let assetImage = UIImage(named: postImagePath) {
+                    postImage.image = assetImage
+                    postImage.isHidden = false
+                } else {
+                    postImage.isHidden = true
+                }
+            }
+        } else {
+            // Hide image view if no image is provided
+            postImage.isHidden = true
+        }
     }
 }

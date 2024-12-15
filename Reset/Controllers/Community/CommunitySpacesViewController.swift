@@ -23,6 +23,10 @@ class CommunitySpacesViewController: UIViewController,UICollectionViewDelegate,U
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        spacesCollectionView.reloadData()
+    }
+    
 
     /*
     // MARK: - Navigation

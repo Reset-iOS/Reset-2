@@ -15,7 +15,7 @@ struct Space {
     let liveDuration: String
 }
 
-let mockSpaces: [Space] = [
+var mockSpaces: [Space] = [
         Space(
             title: "Celebrating Milestones: Big and Small",
             host: "SoberWarrior42",

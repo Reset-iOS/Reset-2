@@ -26,6 +26,8 @@ class CommentViewController: UIViewController, UICollectionViewDelegate, UIColle
         setupKeyboardHandling()
         print(selectedPost!)
         comments = selectedPost.comments
+        commentsCollectionView.register(UINib(nibName: "CommentCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CommentCell")
+        
         // Do any additional setup after loading the view.
     }
     

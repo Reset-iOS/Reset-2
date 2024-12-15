@@ -23,6 +23,11 @@ class CommunityPostsViewController: UIViewController, UICollectionViewDelegate, 
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        postsCollectionView.reloadData()
+        print(mockPosts)
+    }
 
     /*
     // MARK: - Navigation

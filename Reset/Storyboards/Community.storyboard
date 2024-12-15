@@ -130,40 +130,125 @@
                     <view key="view" contentMode="scaleToFill" id="dO1-69-riG">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="AIF-rU-boB">
+                                <rect key="frame" x="16" y="324" width="361" height="171.33333333333337"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4Vc-MU-mes">
+                                        <rect key="frame" x="0.0" y="0.0" width="361" height="70.666666666666671"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Space Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5tC-wy-uEE">
+                                                <rect key="frame" x="0.0" y="0.0" width="361" height="28.666666666666668"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Space title..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7OZ-Tq-YfI">
+                                                <rect key="frame" x="0.0" y="36.666666666666686" width="361" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ztu-n5-VBh">
+                                        <rect key="frame" x="0.0" y="100.66666666666669" width="361" height="70.666666666666686"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Space description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U50-4x-qYv">
+                                                <rect key="frame" x="0.0" y="0.0" width="361" height="28.666666666666668"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="What's it about?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BVy-xv-bzy">
+                                                <rect key="frame" x="0.0" y="36.666666666666629" width="361" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqI-l0-m3v">
+                                <rect key="frame" x="16" y="749.66666666666663" width="361" height="50.333333333333371"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Create Space" buttonSize="large"/>
+                                <connections>
+                                    <action selector="createSpaceButtonTapped:" destination="iFS-nD-MIi" eventType="touchUpInside" id="WhM-lS-Rui"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="OqD-iG-5qy"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="OqD-iG-5qy" firstAttribute="trailing" secondItem="yqI-l0-m3v" secondAttribute="trailing" constant="16" id="50T-42-lSU"/>
+                            <constraint firstItem="AIF-rU-boB" firstAttribute="top" secondItem="OqD-iG-5qy" secondAttribute="top" constant="265" id="9GX-UY-cld"/>
+                            <constraint firstItem="OqD-iG-5qy" firstAttribute="trailing" secondItem="AIF-rU-boB" secondAttribute="trailing" constant="16" id="CO5-TT-u14"/>
+                            <constraint firstItem="yqI-l0-m3v" firstAttribute="leading" secondItem="OqD-iG-5qy" secondAttribute="leading" constant="16" id="IMx-ph-3q2"/>
+                            <constraint firstItem="AIF-rU-boB" firstAttribute="leading" secondItem="OqD-iG-5qy" secondAttribute="leading" constant="16" id="bs2-cm-GHQ"/>
+                            <constraint firstAttribute="bottom" secondItem="yqI-l0-m3v" secondAttribute="bottom" constant="52" id="zDk-fy-aIt"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="createSpaceButton" destination="yqI-l0-m3v" id="vxP-dW-mWV"/>
+                        <outlet property="spaceDescriptionLabel" destination="U50-4x-qYv" id="lg2-3j-C6g"/>
+                        <outlet property="spaceDescriptionTextField" destination="BVy-xv-bzy" id="Yex-ye-M61"/>
+                        <outlet property="spaceTitleLabel" destination="5tC-wy-uEE" id="Ze4-yP-2aH"/>
+                        <outlet property="spaceTitleTextField" destination="7OZ-Tq-YfI" id="Gxh-Xv-AQC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L12-d1-JUe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4331" y="187"/>
+            <point key="canvasLocation" x="4330.5343511450383" y="186.61971830985917"/>
         </scene>
         <!--Add Post View Controller-->
         <scene sceneID="5ar-Ac-JM8">
             <objects>
-                <viewController storyboardIdentifier="AddPostViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="PRO-ra-i5g" customClass="AddPostViewController" customModule="Reset" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddPostViewController" modalPresentationStyle="pageSheet" useStoryboardIdentifierAsRestorationIdentifier="YES" id="PRO-ra-i5g" customClass="AddPostViewController" customModule="Reset" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RM1-PS-Tw3">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Post" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dyJ-Rb-Loo">
-                                <rect key="frame" x="179.66666666666666" y="415.66666666666669" width="34" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a caption..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="QTp-FT-1cf">
+                                <rect key="frame" x="16" y="460" width="361" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kFQ-YN-qkQ">
+                                <rect key="frame" x="0.0" y="59" width="393" height="393"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" button="YES" image="YES"/>
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ilz-EL-qjo">
+                                <rect key="frame" x="16" y="749" width="361" height="51"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Button" cornerStyle="capsule" buttonSize="large"/>
+                                <connections>
+                                    <action selector="postButtonTapped:" destination="PRO-ra-i5g" eventType="touchUpInside" id="gzK-xX-gUM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Hdz-JT-UyO"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="dyJ-Rb-Loo" firstAttribute="centerX" secondItem="RM1-PS-Tw3" secondAttribute="centerX" id="Yv2-dZ-Mua"/>
-                            <constraint firstItem="dyJ-Rb-Loo" firstAttribute="centerY" secondItem="RM1-PS-Tw3" secondAttribute="centerY" id="vPc-XJ-3gd"/>
+                            <constraint firstItem="Hdz-JT-UyO" firstAttribute="trailing" secondItem="ilz-EL-qjo" secondAttribute="trailing" constant="16" id="7DK-wh-m5u"/>
+                            <constraint firstItem="ilz-EL-qjo" firstAttribute="leading" secondItem="Hdz-JT-UyO" secondAttribute="leading" constant="16" id="SJ9-Q2-YoF"/>
+                            <constraint firstAttribute="bottom" secondItem="ilz-EL-qjo" secondAttribute="bottom" constant="52" id="log-WI-wOx"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="postButton" destination="ilz-EL-qjo" id="u4B-WJ-RLI"/>
+                        <outlet property="postImage" destination="kFQ-YN-qkQ" id="rua-XJ-8vF"/>
+                        <outlet property="postTextField" destination="QTp-FT-1cf" id="NLC-0e-sZZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6ne-vM-5UA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4332" y="-604"/>
+            <point key="canvasLocation" x="4330.5343511450383" y="-604.22535211267609"/>
         </scene>
         <!--Comment View Controller-->
         <scene sceneID="Hwb-ZN-Xxg">

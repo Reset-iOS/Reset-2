@@ -13,9 +13,11 @@ class SupportViewController: UIViewController,UICollectionViewDelegate,UICollect
     @IBOutlet weak var addSupportBtn: UIButton!
     @IBOutlet weak var emptySupportText: UILabel!
     
-    var support =  ContactManager.shared.contacts
+    var support = [Contact]()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.title = "Support"
         supportCollectionView.delegate = self
         supportCollectionView.dataSource = self
         support = ContactManager.shared.support
@@ -25,29 +27,33 @@ class SupportViewController: UIViewController,UICollectionViewDelegate,UICollect
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+                
+        // Assign support array from ContactManager.shared.support
+        support = ContactManager.shared.support
         
         // Check if the support array is empty or not
-        let supportCount = ContactManager.shared.support.count
-        support = ContactManager.shared.contacts
-        // Update the UI based on the support array count
+        let supportCount = support.count
+        
         if supportCount > 0 {
             // If there are support members, hide the "Add Support" button and set the label
             addSupportBtn.isHidden = true
             supportCollectionView.isHidden = false
+            emptySupportText.isHidden = true
+            
             // Add the "Plus" button to the navigation bar
             let addSupportItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addSupportTapped))
             navigationItem.rightBarButtonItem = addSupportItem
-            emptySupportText.isHidden = true
-            
         } else {
             // If there are no support members, show the "Add Support" button and set the label
             addSupportBtn.isHidden = false
             emptySupportText.text = "No support members yet."
             supportCollectionView.isHidden = true
+            emptySupportText.isHidden = false
             
             // Remove the "Plus" button from the navigation bar
             navigationItem.rightBarButtonItem = nil
         }
+        
         supportCollectionView.reloadData()
     }
         
@@ -64,19 +70,21 @@ class SupportViewController: UIViewController,UICollectionViewDelegate,UICollect
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        ContactManager.shared.contacts.count
+        ContactManager.shared.support.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SupportCell", for: indexPath) as! SupportChatCollectionViewCell
-        cell.configure(with: support[indexPath.row])
+        if indexPath.row < support.count {
+                    cell.configure(with: support[indexPath.row])
+        }
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width - 20, height: 62)
+        return CGSize(width: 361, height: 62)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
