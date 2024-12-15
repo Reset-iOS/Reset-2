@@ -9,54 +9,91 @@ import UIKit
 import MessageKit
 import InputBarAccessoryView
 
-struct Sender: SenderType {
+struct Sender: SenderType, Codable {
     var displayName: String
     var senderId: String
 }
 
-struct Message: MessageType {
+struct Message: MessageType, Codable {
     var sender: SenderType
     var messageId: String
     var sentDate: Date
     var kind: MessageKind
-    
+    var recipient: SenderType
+
+    enum CodingKeys: String, CodingKey {
+        case sender, messageId, sentDate, kind, recipient
+    }
+
+    // Manually encode MessageKind and SenderType
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(sender as! Sender, forKey: .sender)
+        try container.encode(messageId, forKey: .messageId)
+        try container.encode(sentDate, forKey: .sentDate)
+        try container.encode(recipient as! Sender, forKey: .recipient)
+
+        // Handle MessageKind encoding
+        switch kind {
+        case .text(let text):
+            try container.encode("text", forKey: .kind)
+            try container.encode(text, forKey: .kind)
+        default:
+            throw EncodingError.invalidValue(kind, EncodingError.Context(codingPath: container.codingPath, debugDescription: "Unsupported MessageKind"))
+        }
+    }
+
+    // Manually decode MessageKind and SenderType
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        sender = try container.decode(Sender.self, forKey: .sender)
+        messageId = try container.decode(String.self, forKey: .messageId)
+        sentDate = try container.decode(Date.self, forKey: .sentDate)
+        recipient = try container.decode(Sender.self, forKey: .recipient)
+
+        // Handle MessageKind decoding
+        if let text = try? container.decode(String.self, forKey: .kind) {
+            kind = .text(text)
+        } else {
+            throw DecodingError.dataCorruptedError(forKey: .kind, in: container, debugDescription: "Unsupported MessageKind")
+        }
+    }
+
+    init(sender: SenderType, messageId: String, sentDate: Date, kind: MessageKind, recipient: SenderType) {
+        self.sender = sender
+        self.messageId = messageId
+        self.sentDate = sentDate
+        self.kind = kind
+        self.recipient = recipient
+    }
+}
+
+enum CodingKeys: String, CodingKey {
+        case sender, messageId, sentDate, kind, recipient
 }
 
 class ChatViewController: MessagesViewController, MessagesDataSource,MessagesLayoutDelegate,MessagesDisplayDelegate,InputBarAccessoryViewDelegate {
     
     var user:Contact?
     var currentUser: Sender = Sender(displayName: "Emily", senderId: "self")
-    var otherUser: Sender = Sender(displayName: "John Doe", senderId: "other")
-    
-    var messages = [MessageType]()
+    var otherUser: Sender?
+    var messages = [MessageType]() {
+            didSet {
+                saveMessages()
+            }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        messages.append(
-            Message(sender:currentUser,
-                    messageId:"1",
-                    sentDate:Date().addingTimeInterval(-86400),
-                    kind:.text("Hi, there!")
-                   ))
-        messages.append(
-            Message(sender:otherUser,
-                    messageId:"2",
-                    sentDate:Date().addingTimeInterval(-80000),
-                    kind:.text("Hi!")
-                   ))
-        messages.append(
-            Message(sender:currentUser,
-                    messageId:"3",
-                    sentDate:Date().addingTimeInterval(-78000),
-                    kind:.text("How are you?")
-                   ))
-        messages.append(
-            Message(sender:currentUser,
-                    messageId:"4",
-                    sentDate:Date().addingTimeInterval(-76000),
-                    kind:.text("I'm fine. How've you been?")
-                   ))
+        guard let user = user else {
+                print("Error: user is nil. Make sure to pass a valid Contact before navigating to ChatViewController.")
+                return
+        }
+        
+        otherUser = Sender(displayName: user.name, senderId: user.name)
+        
+        messages = loadMessages()
         print(messages)
         
         
@@ -66,7 +103,7 @@ class ChatViewController: MessagesViewController, MessagesDataSource,MessagesLay
         messageInputBar.delegate = self
         messagesCollectionView.reloadData()
         
-        title = user?.name
+        title = user.name
         
         
         // Do any additional setup after loading the view.
@@ -109,12 +146,40 @@ class ChatViewController: MessagesViewController, MessagesDataSource,MessagesLay
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         let message = Message(sender: currentSender, messageId: UUID().uuidString,
                               sentDate: Date(),
-                              kind: .text(text))
+                              kind: .text(text),
+                              recipient: otherUser!)
         print("Pressed Send")
         messages.append(message)
         messagesCollectionView.reloadData()
         messagesCollectionView.scrollToLastItem(animated: true)
         inputBar.inputTextView.text = ""
+    }
+    
+    private func getConversationKey() -> String {
+        guard let otherUserId = otherUser?.senderId else {
+                print("Error: otherUser is nil")
+                return ""
+            }
+        return "\(currentUser.senderId)_\(otherUserId)"
+    }
+
+    private func saveMessages() {
+            let conversationKey = getConversationKey()
+            let encoder = JSONEncoder()
+            if let encodedMessages = try? encoder.encode(messages as! [Message]) {
+                UserDefaults.standard.set(encodedMessages, forKey: conversationKey)
+            }
+    }
+
+    private func loadMessages() -> [MessageType] {
+            let conversationKey = getConversationKey()
+            if let savedMessagesData = UserDefaults.standard.data(forKey: conversationKey) {
+                let decoder = JSONDecoder()
+                if let decodedMessages = try? decoder.decode([Message].self, from: savedMessagesData) {
+                    return decodedMessages
+                }
+            }
+            return []
     }
 
 

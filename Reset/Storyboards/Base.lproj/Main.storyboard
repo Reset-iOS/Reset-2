@@ -156,19 +156,20 @@
         <!--Home-->
         <scene sceneID="6V3-P5-J7F">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="77w-Sz-o5m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="10V-aZ-Io1" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" image="tabBarItem:Qw9-Fw-jWQ:image" catalog="system" selectedImage="tabBarItem:Qw9-Fw-jWQ:image" id="Qw9-Fw-jWQ"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="tabBarItem:Qw9-Fw-jWQ:image" selectedImage="tabBarItem:Qw9-Fw-jWQ:image" id="Qw9-Fw-jWQ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="lb9-4a-XZ0">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <navigationBarAppearance key="compactAppearance" backgroundEffect="systemThinMaterial"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
                         <segue destination="usN-1L-f4V" kind="relationship" relationship="rootViewController" id="B9F-p5-u5D"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="77w-Sz-o5m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-877" y="-219"/>
         </scene>
@@ -177,7 +178,7 @@
         <image name="figure.2" catalog="system" width="128" height="92"/>
         <image name="person.3.fill" catalog="system" width="128" height="66"/>
         <image name="rosette" catalog="system" width="107" height="128"/>
-        <image name="tabBarItem:Qw9-Fw-jWQ:image" catalog="system" width="128" height="104">
+        <image name="tabBarItem:Qw9-Fw-jWQ:image" width="128" height="104">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05T
 S2V5ZWRBcmNoaXZlctEICVRyb290gAGvEBELDBscIRkmKywzNjlDS0xQU1UkbnVsbNcNDg8QERITFBUW

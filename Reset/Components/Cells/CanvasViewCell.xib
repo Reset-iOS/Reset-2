@@ -20,6 +20,12 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lql-kH-qiF">
                         <rect key="frame" x="0.0" y="0.0" width="360" height="256"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start adding to your canvas" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UTZ-21-B1i">
+                                <rect key="frame" x="16" y="117.99999999999999" width="328" height="20.333333333333329"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <stackView opaque="NO" contentMode="scaleAspectFit" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5bx-my-4cg">
                                 <rect key="frame" x="8" y="8" width="344" height="240"/>
                                 <subviews>
@@ -53,11 +59,15 @@
                         <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="256" id="1aU-2V-usR"/>
+                            <constraint firstAttribute="trailing" secondItem="UTZ-21-B1i" secondAttribute="trailing" constant="16" id="1vE-WA-ywZ"/>
                             <constraint firstAttribute="width" constant="360" id="7TM-A0-tDB"/>
+                            <constraint firstItem="UTZ-21-B1i" firstAttribute="centerY" secondItem="lql-kH-qiF" secondAttribute="centerY" id="WPd-wG-lFk"/>
                             <constraint firstItem="5bx-my-4cg" firstAttribute="top" secondItem="lql-kH-qiF" secondAttribute="top" constant="8" id="Zx2-3c-Wgv"/>
                             <constraint firstAttribute="trailing" secondItem="5bx-my-4cg" secondAttribute="trailing" constant="8" id="fDx-9t-ttm"/>
+                            <constraint firstItem="UTZ-21-B1i" firstAttribute="centerX" secondItem="lql-kH-qiF" secondAttribute="centerX" id="nzU-Sh-wKv"/>
                             <constraint firstItem="5bx-my-4cg" firstAttribute="leading" secondItem="lql-kH-qiF" secondAttribute="leading" constant="8" id="qDK-VM-Mff"/>
                             <constraint firstAttribute="bottom" secondItem="5bx-my-4cg" secondAttribute="bottom" constant="8" id="qs1-rU-cd7"/>
+                            <constraint firstItem="UTZ-21-B1i" firstAttribute="leading" secondItem="lql-kH-qiF" secondAttribute="leading" constant="16" id="y9U-fU-vyk"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -75,6 +85,7 @@
                 <outlet property="imageOne" destination="TDK-lE-3iT" id="PNo-Fx-XOe"/>
                 <outlet property="imageThree" destination="0qW-dC-2BM" id="frt-qe-shH"/>
                 <outlet property="imageTwo" destination="X4S-cq-zca" id="fav-re-AUl"/>
+                <outlet property="placeHolderText" destination="UTZ-21-B1i" id="FjZ-Zc-MzE"/>
             </connections>
             <point key="canvasLocation" x="141.98473282442748" y="67.605633802816911"/>
         </collectionViewCell>

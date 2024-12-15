@@ -47,37 +47,42 @@ class CanvasViewController: UIViewController, UICollectionViewDelegate,UICollect
         let item = model.items[indexPath.row]
         
         switch item {
-        case .image(let image):
+        case .image(let imageURL):
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UIImageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
-            cell.image.image = image
-            cell.deleteButton.isHidden = !editMode // Show delete button only in edit mode
+            if let image = UIImage(contentsOfFile: imageURL) {
+                cell.image.image = image
+            }
+            cell.deleteButton.isHidden = !editMode
             cell.deleteAction = { [weak self] in
-                self?.deleteItem(at: indexPath) // Handle the delete action
+                self?.deleteItem(at: indexPath)
             }
             return cell
             
         case .text(let text):
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UITextCollectionViewCell", for: indexPath) as! TextCollectionViewCell
             cell.text.text = text
-            cell.deleteButton.isHidden = !editMode // Show delete button only in edit mode
+            cell.deleteButton.isHidden = !editMode
             cell.deleteAction = { [weak self] in
-                self?.deleteItem(at: indexPath) // Handle the delete action
+                self?.deleteItem(at: indexPath)
             }
             return cell
         }
     }
-    
+        
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let item = model.items[indexPath.item]
         
         switch item {
-        case .image(let image):
-            return image.size // Return the image size
-            
+        case .image(let imageURL):
+            if let image = UIImage(contentsOfFile: imageURL) {
+                return image.size
+            }
+            return CGSize(width: 100, height: 100)
+        
         case .text(let text):
-            let width = collectionView.frame.width - 20 // Adjust padding
-            _ = text.height(withConstrainedWidth: width, font: UIFont.systemFont(ofSize: 16))
-            return CGSize(width: 1280, height:1280) // Add padding
+            let width = collectionView.frame.width - 20
+            let height = text.height(withConstrainedWidth: width, font: UIFont.systemFont(ofSize: 16))
+            return CGSize(width: 1280, height: 1280)
         }
     }
     
@@ -93,7 +98,8 @@ class CanvasViewController: UIViewController, UICollectionViewDelegate,UICollect
         
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         collectionView.addGestureRecognizer(longPressGesture)
-        
+        model.loadItems()
+        collectionView.reloadData()
     }
     
     func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
@@ -104,6 +110,7 @@ class CanvasViewController: UIViewController, UICollectionViewDelegate,UICollect
         // Update data source array to reflect the move
         let movedItem = model.items.remove(at: sourceIndexPath.item)
         model.items.insert(movedItem, at: destinationIndexPath.item)
+        model.saveItems()
     }
     
     // MARK: - Long Press Gesture Handler
@@ -159,6 +166,7 @@ class CanvasViewController: UIViewController, UICollectionViewDelegate,UICollect
             // Remove the item from the data source
             self.model.items.remove(at: indexPath.item)
             
+            self.model.saveItems()
             // Delete the item from the collection view
             self.collectionView.deleteItems(at: [indexPath])
         }))
@@ -190,6 +198,7 @@ class CanvasViewController: UIViewController, UICollectionViewDelegate,UICollect
             textAlert.addAction(UIAlertAction(title: "Add", style: .default, handler: { _ in
                 if let text = textAlert.textFields?.first?.text, !text.isEmpty {
                     self.model.items.append(.text(text))
+                    self.model.saveItems()
                     self.collectionView.reloadData()
                 }
             }))
@@ -199,20 +208,45 @@ class CanvasViewController: UIViewController, UICollectionViewDelegate,UICollect
         
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            picker.dismiss(animated: true)
-            if let editedImage = info[.editedImage] as? UIImage {
-                self.model.items.append(.image(editedImage))
-            } else if let originalImage = info[.originalImage] as? UIImage {
-                self.model.items.append(.image(originalImage))
-            }
+        if let editedImage = info[.editedImage] as? UIImage {
+            saveImage(editedImage) // Save the edited image
+        } else if let originalImage = info[.originalImage] as? UIImage {
+            saveImage(originalImage) // Save the original image
+        }
+        
+        collectionView.reloadData()
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func getDocumentsDirectory() -> URL {
+        // Get the URL for the app's Documents directory
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+    
+    func saveImage(_ image: UIImage) {
+        // Convert the image to Data (PNG format)
+        if let imageData = image.pngData() {
+            // Save the image data to a file and get the file path
+            let fileName = UUID().uuidString + ".png"
+            let fileURL = getDocumentsDirectory().appendingPathComponent(fileName)
             
-            collectionView.reloadData()
+            do {
+                try imageData.write(to: fileURL)
+                // Store the file path in the model instead of the image data itself
+                model.items.append(.image(fileURL.path))
+                model.saveItems() // Save items to UserDefaults or a file
+            } catch {
+                print("Failed to save image: \(error.localizedDescription)")
+            }
+        }
     }
         
     
-        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
             picker.dismiss(animated: true, completion: nil)
-        }
+    }
         
         
         

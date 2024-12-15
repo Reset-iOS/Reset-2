@@ -35,7 +35,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="QdP-Ev-FBZ" secondAttribute="trailing" constant="4" id="46h-Sg-Scc"/>
                             <constraint firstItem="QdP-Ev-FBZ" firstAttribute="leading" secondItem="6f8-dH-HWf" secondAttribute="leading" constant="4" id="KXQ-qZ-eDp"/>
@@ -64,7 +64,7 @@
     </objects>
     <resources>
         <image name="minus.circle.fill" catalog="system" width="128" height="123"/>
-        <systemColor name="systemBackgroundColor">
+        <systemColor name="tertiarySystemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>

@@ -30,27 +30,24 @@ class SupportViewController: UIViewController,UICollectionViewDelegate,UICollect
                 
         // Assign support array from ContactManager.shared.support
         support = ContactManager.shared.support
+        print("Support Array: \(support)")
         
         // Check if the support array is empty or not
         let supportCount = support.count
         
         if supportCount > 0 {
-            // If there are support members, hide the "Add Support" button and set the label
             addSupportBtn.isHidden = true
             supportCollectionView.isHidden = false
             emptySupportText.isHidden = true
             
-            // Add the "Plus" button to the navigation bar
             let addSupportItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addSupportTapped))
             navigationItem.rightBarButtonItem = addSupportItem
         } else {
-            // If there are no support members, show the "Add Support" button and set the label
             addSupportBtn.isHidden = false
             emptySupportText.text = "No support members yet."
             supportCollectionView.isHidden = true
             emptySupportText.isHidden = false
             
-            // Remove the "Plus" button from the navigation bar
             navigationItem.rightBarButtonItem = nil
         }
         

@@ -42,23 +42,48 @@ class DetailViewController: UIViewController {
         soberSinceLabel.text = "Sober Since"
         soberDurationLabel.text = "\(contact!.soberDuration)"
         navigationItem.title = "\(contact!.name)"
-        
+        userImage.image = UIImage(named: contact!.profile)
+        // Convert soberSince to Date and calculate weeks
+        if let soberSinceDate = dateFromString(contact!.soberSince) {
+            let weeksSinceSober = weeksSince(date: soberSinceDate)
+            soberDurationLabel.text = "\(weeksSinceSober) weeks"
+        } else {
+            soberDurationLabel.text = "Invalid Date"
+        }
         
 
         // Do any additional setup after loading the view.
     }
     
+    // Convert string date (yyyy-MM-dd) to Date
+       func dateFromString(_ dateString: String) -> Date? {
+           let dateFormatter = DateFormatter()
+           dateFormatter.dateFormat = "yyyy-MM-dd"
+           return dateFormatter.date(from: dateString)
+       }
+       
+       // Calculate the number of weeks since the given date
+       func weeksSince(date: Date) -> Int {
+           let currentDate = Date()
+           let calendar = Calendar.current
+           let components = calendar.dateComponents([.weekOfYear], from: date, to: currentDate)
+           return components.weekOfYear ?? 0
+       }
+    
 
     @IBAction func addSupportMember(_ sender: UIButton) {
         guard let contact = contact else { return }
-            
+        
         // Add the contact to the support array
-        ContactManager.shared.support.append(contact)
+        if !ContactManager.shared.support.contains(where: { $0.email == contact.email }) {
+            ContactManager.shared.support.append(contact)
+        }
+        
         print(ContactManager.shared.support)
-            
+        
         if let supportVC = navigationController?.viewControllers.first(where: { $0 is SupportViewController }) {
-                // Pop to SupportViewController and remove all other view controllers
-                navigationController?.popToViewController(supportVC, animated: true)
+            // Pop to SupportViewController and remove all other view controllers
+            navigationController?.popToViewController(supportVC, animated: true)
         }
     }
     /*
