@@ -12,7 +12,7 @@
         <!--Support View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" customClass="SupportViewController" customModule="Reset" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SupportViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="SupportViewController" customModule="Reset" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -96,6 +96,7 @@
         <!--Navigation Controller-->
         <scene sceneID="l7W-zn-0rs">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XSD-9G-ch5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="w2V-eu-xD9" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="4sT-RZ-Re8">
@@ -108,7 +109,6 @@
                         <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="mwc-OJ-s5x"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XSD-9G-ch5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-181" y="27"/>
         </scene>

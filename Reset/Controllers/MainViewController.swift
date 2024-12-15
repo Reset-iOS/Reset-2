@@ -38,7 +38,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         collectionView.register(UINib(nibName: "CanvasViewCell", bundle: nil), forCellWithReuseIdentifier: "CanvasViewCell")
         collectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: "CustomCollectionViewCell")
         collectionView.register(CustomHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "CustomHeaderView")
-        
+        collectionView.showsVerticalScrollIndicator = false
         // Add Collection View to the View
         view.addSubview(collectionView)
     }
