@@ -9,7 +9,7 @@ import UIKit
 
 class CommunitySpacesViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
    
-
+    var spaces: [Space] = []
     @IBOutlet weak var spacesCollectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,13 +17,14 @@ class CommunitySpacesViewController: UIViewController,UICollectionViewDelegate,U
         spacesCollectionView.delegate = self
         spacesCollectionView.dataSource = self
         spacesCollectionView.register(UINib(nibName: "SpacesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SpaceCell")
-        
+        spaces = SpacesDataPersistence.shared.loadSpaces()
         spacesCollectionView.showsVerticalScrollIndicator = false
 
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        spaces = SpacesDataPersistence.shared.loadSpaces()
         spacesCollectionView.reloadData()
     }
     
@@ -39,12 +40,12 @@ class CommunitySpacesViewController: UIViewController,UICollectionViewDelegate,U
     */
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        mockSpaces.count
+        spaces.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SpaceCell", for: indexPath) as! SpacesCollectionViewCell
-        cell.configureCell(space: mockSpaces[indexPath.row])
+        cell.configureCell(space: spaces[indexPath.row])
         return cell
     }
     

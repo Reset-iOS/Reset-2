@@ -45,7 +45,6 @@
         <!--Community-->
         <scene sceneID="VmM-yh-xkA">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kv0-9n-aLR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9at-ld-N12" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Community" image="tabBarItem:25u-Uq-mzy:image" id="25u-Uq-mzy"/>
                     <toolbarItems/>
@@ -59,6 +58,7 @@
                         <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="Jym-O3-o0s"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kv0-9n-aLR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1052.6717557251909" y="-2.1126760563380285"/>
         </scene>
@@ -170,9 +170,9 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqI-l0-m3v">
-                                <rect key="frame" x="16" y="749.66666666666663" width="361" height="50.333333333333371"/>
+                                <rect key="frame" x="16" y="723.66666666666663" width="361" height="34.333333333333371"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Create Space" buttonSize="large"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Create Space" cornerStyle="capsule" buttonSize="medium"/>
                                 <connections>
                                     <action selector="createSpaceButtonTapped:" destination="iFS-nD-MIi" eventType="touchUpInside" id="WhM-lS-Rui"/>
                                 </connections>
@@ -184,9 +184,9 @@
                             <constraint firstItem="OqD-iG-5qy" firstAttribute="trailing" secondItem="yqI-l0-m3v" secondAttribute="trailing" constant="16" id="50T-42-lSU"/>
                             <constraint firstItem="AIF-rU-boB" firstAttribute="top" secondItem="OqD-iG-5qy" secondAttribute="top" constant="265" id="9GX-UY-cld"/>
                             <constraint firstItem="OqD-iG-5qy" firstAttribute="trailing" secondItem="AIF-rU-boB" secondAttribute="trailing" constant="16" id="CO5-TT-u14"/>
+                            <constraint firstItem="OqD-iG-5qy" firstAttribute="bottom" secondItem="yqI-l0-m3v" secondAttribute="bottom" constant="60" id="FHF-f8-vEG"/>
                             <constraint firstItem="yqI-l0-m3v" firstAttribute="leading" secondItem="OqD-iG-5qy" secondAttribute="leading" constant="16" id="IMx-ph-3q2"/>
                             <constraint firstItem="AIF-rU-boB" firstAttribute="leading" secondItem="OqD-iG-5qy" secondAttribute="leading" constant="16" id="bs2-cm-GHQ"/>
-                            <constraint firstAttribute="bottom" secondItem="yqI-l0-m3v" secondAttribute="bottom" constant="52" id="zDk-fy-aIt"/>
                         </constraints>
                     </view>
                     <connections>
@@ -209,9 +209,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a caption..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="QTp-FT-1cf">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a caption..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="QTp-FT-1cf">
                                 <rect key="frame" x="16" y="460" width="361" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -225,23 +224,36 @@
                                 </accessibility>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ilz-EL-qjo">
-                                <rect key="frame" x="16" y="749" width="361" height="51"/>
+                                <rect key="frame" x="16" y="723.66666666666663" width="361" height="34.333333333333371"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Button" cornerStyle="capsule" buttonSize="large"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Post" cornerStyle="capsule" buttonSize="medium"/>
                                 <connections>
                                     <action selector="postButtonTapped:" destination="PRO-ra-i5g" eventType="touchUpInside" id="gzK-xX-gUM"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Image" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfw-Tr-C1W">
+                                <rect key="frame" x="16" y="245" width="361" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Hdz-JT-UyO"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Hdz-JT-UyO" firstAttribute="trailing" secondItem="ilz-EL-qjo" secondAttribute="trailing" constant="16" id="7DK-wh-m5u"/>
+                            <constraint firstItem="cfw-Tr-C1W" firstAttribute="top" secondItem="Hdz-JT-UyO" secondAttribute="top" constant="186" id="F6v-Jp-dvu"/>
+                            <constraint firstItem="Hdz-JT-UyO" firstAttribute="trailing" secondItem="cfw-Tr-C1W" secondAttribute="trailing" constant="16" id="JQq-Cd-nu1"/>
+                            <constraint firstItem="cfw-Tr-C1W" firstAttribute="leading" secondItem="Hdz-JT-UyO" secondAttribute="leading" constant="16" id="MID-B8-2KO"/>
                             <constraint firstItem="ilz-EL-qjo" firstAttribute="leading" secondItem="Hdz-JT-UyO" secondAttribute="leading" constant="16" id="SJ9-Q2-YoF"/>
-                            <constraint firstAttribute="bottom" secondItem="ilz-EL-qjo" secondAttribute="bottom" constant="52" id="log-WI-wOx"/>
+                            <constraint firstItem="Hdz-JT-UyO" firstAttribute="trailing" secondItem="QTp-FT-1cf" secondAttribute="trailing" constant="16" id="TDF-Sg-LcM"/>
+                            <constraint firstItem="QTp-FT-1cf" firstAttribute="leading" secondItem="Hdz-JT-UyO" secondAttribute="leading" constant="16" id="W2c-Ry-hKf"/>
+                            <constraint firstItem="QTp-FT-1cf" firstAttribute="top" secondItem="cfw-Tr-C1W" secondAttribute="bottom" constant="194" id="nwS-oH-hh4"/>
+                            <constraint firstItem="Hdz-JT-UyO" firstAttribute="bottom" secondItem="ilz-EL-qjo" secondAttribute="bottom" constant="60" id="xMb-dF-Zle"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addImageLabel" destination="cfw-Tr-C1W" id="Y3Z-GB-IIn"/>
                         <outlet property="postButton" destination="ilz-EL-qjo" id="u4B-WJ-RLI"/>
                         <outlet property="postImage" destination="kFQ-YN-qkQ" id="rua-XJ-8vF"/>
                         <outlet property="postTextField" destination="QTp-FT-1cf" id="NLC-0e-sZZ"/>

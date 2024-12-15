@@ -34,8 +34,15 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         print(contact!)
         nameAndAgeLabel.text = "\(contact!.name)"
-        
+        longestStreakValueLabel.text = "\(contact!.longestStreak)"
+        longestStreakLabel.text = "Longest Streak"
+        numOfResetsLabel.text = "\(contact!.numOfResets)"
+        resetsLabel.text = "Resets"
+        joinDateLabel.text = "\(contact!.joinDate)"
+        soberSinceLabel.text = "Sober Since"
+        soberDurationLabel.text = "\(contact!.soberDuration)"
         navigationItem.title = "\(contact!.name)"
+        
         
 
         // Do any additional setup after loading the view.

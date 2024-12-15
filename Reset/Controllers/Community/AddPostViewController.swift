@@ -9,6 +9,8 @@ import UIKit
 
 class AddPostViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
+    
+    @IBOutlet weak var addImageLabel: UILabel!
     @IBOutlet weak var postButton: UIButton!
     @IBOutlet weak var postTextField: UITextField!
     @IBOutlet weak var postImage: UIImageView!
@@ -63,6 +65,7 @@ class AddPostViewController: UIViewController, UITextFieldDelegate, UIImagePicke
     @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             if let selectedImage = info[.originalImage] as? UIImage {
                 postImage.image = selectedImage
+                addImageLabel.isHidden = true
             }
             dismiss(animated: true, completion: nil)
             validatePostButton()
@@ -108,11 +111,12 @@ class AddPostViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         
         var savedImagePath: String? = nil
         if let image = postImage.image {
-            savedImagePath = FileManagerHelper.saveImageToDisk(image)
+                savedImagePath = FileManagerHelper.saveImageToDisk(image)
         }
         
         // Create a new post
         let newPost = Post(
+            id:UUID(),
             profileImageName: "Emily", // Replace with actual user data
             userName: "Emily",         // Replace with actual user data
             dateOfPost: getCurrentDateString(),
@@ -125,6 +129,7 @@ class AddPostViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         
         print("New post created: \(newPost)")
         mockPosts.append(newPost)
+        PostDataPersistence.shared.savePosts(mockPosts)
         
         // Show success alert
         let alert = UIAlertController(title: "Success", message: "Your post has been added successfully!", preferredStyle: .alert)
@@ -136,6 +141,7 @@ class AddPostViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         // Reset UI
         postTextField.text = ""
         postImage.image = nil
+        addImageLabel.isHidden = false
         validatePostButton()
     }
 

@@ -82,6 +82,7 @@ class AddSpaceViewController: UIViewController, UITextFieldDelegate {
 
         // Append to mockSpaces
         mockSpaces.append(newSpace)
+        SpacesDataPersistence.shared.saveSpaces(mockSpaces)
 
         // Show success alert
         let alert = UIAlertController(title: "Space Created", message: "Your space has been created successfully!", preferredStyle: .alert)

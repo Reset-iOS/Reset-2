@@ -62,26 +62,24 @@ class CommunityPostsViewController: UIViewController, UICollectionViewDelegate, 
         }
     
     func openCommentViewController(for post: Post) {
-            // Assuming you are using a storyboard-based segue to CommentViewController
-            
-            if let commentVC = storyboard?.instantiateViewController(withIdentifier: "CommentViewController") as? CommentViewController {
-                commentVC.selectedPost = post
-                commentVC.onNewComment = { [weak self] newComment in
-                    // Add new comment to post
-                    if let index = mockPosts.firstIndex(where: { $0.userName == post.userName }) {
-                        mockPosts[index].comments.append(newComment)
-                        self?.postsCollectionView.reloadData()
-                    }
+        if let commentVC = storyboard?.instantiateViewController(withIdentifier: "CommentViewController") as? CommentViewController {
+            commentVC.selectedPost = post
+            commentVC.onNewComment = { [weak self] newComment in
+                if let index = mockPosts.firstIndex(where: { $0.userName == post.userName }) {
+                    mockPosts[index].comments.append(newComment)
+                    mockPosts[index].commentsCount += 1
+                    PostDataPersistence.shared.savePosts(mockPosts) // Save updated posts
+                    self?.postsCollectionView.reloadData()
                 }
-                
-                // Present CommentViewController as a bottom sheet
-                commentVC.modalPresentationStyle = .pageSheet
-                if let sheet = commentVC.sheetPresentationController {
-                    sheet.detents = [.medium(), .large()]  // Set sheet height to medium or large
-                }
-                present(commentVC, animated: true, completion: nil)
             }
+
+            commentVC.modalPresentationStyle = .pageSheet
+            if let sheet = commentVC.sheetPresentationController {
+                sheet.detents = [.medium(), .large()]
+            }
+            present(commentVC, animated: true, completion: nil)
         }
+    }
     
 
 }

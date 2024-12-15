@@ -7,7 +7,9 @@
 
 import Foundation
 
-struct Comment {
+struct Comment: Codable {
+    let id: UUID
+    let postID: UUID
     let userName: String
     let profileImage: String
     let commentText: String

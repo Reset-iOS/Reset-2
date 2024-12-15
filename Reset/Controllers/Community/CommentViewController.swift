@@ -23,6 +23,7 @@ class CommentViewController: UIViewController, UICollectionViewDelegate, UIColle
         super.viewDidLoad()
         commentsCollectionView.delegate = self
         commentsCollectionView.dataSource = self
+        commentsCollectionView.reloadData()
         setupKeyboardHandling()
         print(selectedPost!)
         comments = selectedPost.comments
@@ -31,27 +32,43 @@ class CommentViewController: UIViewController, UICollectionViewDelegate, UIColle
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        commentsCollectionView.reloadData()
+    }
+    
+    override func viewIsAppearing(_ animated: Bool) {
+        commentsCollectionView.reloadData()
+    }
 
     @IBAction func sendButtonTapped(_ sender: UIButton) {
-        guard let commentText = commentTextField.text, !commentText.isEmpty else {
+        // Ensure the comment text is not empty
+        guard let commentText = commentTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+              !commentText.isEmpty else {
             return
         }
-        
+
         // Create a new comment
-        let newComment = Comment(userName: "Emily", profileImage: "Emily", commentText: commentText)
-        
-        // Add the comment to the comments array
-        comments.append(newComment)
-        
-        // Notify the parent view controller to update the post's comments array
-        onNewComment?(newComment)
-        
-        // Reload the collection view
+        let newComment = Comment(
+            id: UUID(),
+            postID: selectedPost.id, // Use the current post's UUID
+            userName: "Emily", // Replace with the actual user's name
+            profileImage: "Emily", // Replace with the actual user's profile image
+            commentText: commentText
+        )
+
+        // Persist the comment using PostDataPersistence
+        PostDataPersistence.shared.addComment(toPostWithID: selectedPost.id, comment: newComment)
+
+        // Reload the comments for the current post
+        if let postIndex = mockPosts.firstIndex(where: { $0.id == selectedPost.id }) {
+            comments = mockPosts[postIndex].comments
+            commentsCollectionView.reloadData()
+        }
+
         commentsCollectionView.reloadData()
-        
         // Clear the text field
         commentTextField.text = ""
-        
+
         // Dismiss the keyboard
         commentTextField.resignFirstResponder()
     }
