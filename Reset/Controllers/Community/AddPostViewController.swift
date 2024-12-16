@@ -14,8 +14,17 @@ class AddPostViewController: UIViewController, UITextFieldDelegate, UIImagePicke
     @IBOutlet weak var postButton: UIButton!
     @IBOutlet weak var postTextField: UITextField!
     @IBOutlet weak var postImage: UIImageView!
+    var currentUser: Contact?
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let user = UserManager.shared.getCurrentUser() {
+            currentUser = user
+        } else {
+            print("Error: No current user found.")
+            // Optionally, set a default user or handle the case gracefully
+            currentUser = Contact(name: "Default User", phone: "000-0000", email: "default@example.com", profile: "Emily", age: 0, joinDate: "", soberDuration: "", soberSince: "", numOfResets: 0, longestStreak: 0, daysPerWeek: 0, averageSpend: 0)
+        }
         
         
         
@@ -114,11 +123,15 @@ class AddPostViewController: UIViewController, UITextFieldDelegate, UIImagePicke
                 savedImagePath = FileManagerHelper.saveImageToDisk(image)
         }
         
+        guard let user = currentUser else {
+            fatalError("Error: `currentUser` is nil when attempting to configure the cell.")
+        }
+        
         // Create a new post
         let newPost = Post(
             id:UUID(),
-            profileImageName: "Emily", // Replace with actual user data
-            userName: "Emily",         // Replace with actual user data
+            profileImageName: user.profile, // Replace with actual user data
+            userName: user.name,         // Replace with actual user data
             dateOfPost: getCurrentDateString(),
             postImageName: savedImagePath, // Save file path instead of UIImage
             postText: postText,

@@ -29,7 +29,12 @@ class HomeProfileCell: UICollectionViewCell {
     }
     
     func configureCell(with image: String) {
-        profileImage.image = UIImage(named: image)
+        if let savedImage = ContactManager.shared.retrieveImage(fromPath: image) {
+            profileImage.image = savedImage
+        } else {
+            // Fallback if image not found at path, use a default placeholder image
+            profileImage.image = UIImage(named: image)
+        }
     }
     
 

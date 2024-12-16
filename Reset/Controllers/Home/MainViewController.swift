@@ -3,7 +3,7 @@ import UIKit
 class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var collectionView: UICollectionView!
-   
+    var currentUser: Contact?
     var model = Model()
     let sections = ["Profile","Progress", "Savings", "Canvas"]
     let items = [
@@ -15,6 +15,13 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let user = UserManager.shared.getCurrentUser() {
+            currentUser = user
+        } else {
+            print("Error: No current user found.")
+            // Optionally, set a default user or handle the case gracefully
+            currentUser = Contact(name: "Default User", phone: "000-0000", email: "default@example.com", profile: "Emily", age: 0, joinDate: "", soberDuration: "", soberSince: "", numOfResets: 0, longestStreak: 0, daysPerWeek: 0, averageSpend: 0)
+        }
         
         model.loadItems()
         setupCollectionView()
@@ -66,31 +73,64 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         if indexPath.section == 0 {
+            // Profile Section - HomeProfileCell
+            guard let user = currentUser else {
+                fatalError("Error: `currentUser` is nil when attempting to configure the cell.")
+            }
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeProfileCell", for: indexPath) as! HomeProfileCell
-            // Pass dynamic data to the cell
-            cell.configureCell(with: "Emily") // Example data
+            cell.configureCell(with: user.profile)
+            cell.greetingLabel.text = "Hello \(user.name)"
             return cell
         }
+        
         if indexPath.section == 1 {
-                    // Use ProgressCollectionViewCell for the first section
-            // Use ProgressViewCell for the first section
+            // Progress Section - ProgressViewCell
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProgressViewCell", for: indexPath) as! ProgressViewCell
-            // Pass dynamic data to the cell
-            cell.configureCell(daysSoberOngoing: 100, daysToNextMilestone: 20, progress: 0.75) // Example data
+            
+            // Calculate daysSoberOngoing based on the current user's soberSince date
+            if let soberSinceDate = currentUser?.soberSince.toDate() {
+                let daysSoberOngoing = soberSinceDate.days(from: Date())
+                
+                // Calculate the number of days to next milestone (example: 30 days per milestone)
+                let daysToNextMilestone = 30 - (daysSoberOngoing % 30)
+                
+                // Progress is the ratio of days sober ongoing to the milestone (e.g., 30-day milestones)
+                let progress = CGFloat(daysSoberOngoing % 30) / 30.0
+                
+                // Pass dynamic data to the cell
+                cell.configureCell(daysSoberOngoing: daysSoberOngoing, daysToNextMilestone: daysToNextMilestone, progress: progress)
+            } else {
+                cell.configureCell(daysSoberOngoing: 0, daysToNextMilestone: 30, progress: 0.0)  // Default in case of nil
+            }
+            
             return cell
         }
         
         if indexPath.section == 2 {
+            // Savings Section - SavingsViewCell
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SavingsViewCell", for: indexPath) as! SavingsViewCell
-            // Pass dynamic data to the cell
-            cell.configureCell(overallSavings:3000,weekSavings: 2100) // Example data
+            
+            // Calculate overall savings based on days sober ongoing and average spend per day
+            if let soberSinceDate = currentUser?.soberSince.toDate() {
+                let daysSoberOngoing = soberSinceDate.days(from: Date())
+                let overallSavings = daysSoberOngoing * currentUser!.averageSpend
+                
+                // Calculate savings for the week (divide by 7, but ensure 0 if less than 7 days)
+                let daysThisWeek = min(daysSoberOngoing, 7)
+                let savingsThisWeek = (daysThisWeek * currentUser!.averageSpend) / 7
+                
+                // Pass dynamic data to the cell
+                cell.configureCell(overallSavings: overallSavings, weekSavings: savingsThisWeek)
+            } else {
+                cell.configureCell(overallSavings: 0, weekSavings: 0)  // Default if soberSince is nil
+            }
+            
             return cell
         }
         
         else {
-            // Canvas section
+            // Canvas Section - CanvasViewCell
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CanvasViewCell", for: indexPath) as! CanvasViewCell
             
             // Check if there are exactly three images in the model
@@ -109,10 +149,11 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 // If there aren't exactly three items, configure without images
                 cell.configureCellWithoutImages()
             }
+            
             return cell
         }
-        
     }
+
     
     // MARK: - Header Configuration
     
@@ -168,3 +209,23 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
     }
 }
+
+extension String {
+    func toDate(format: String = "yyyy-MM-dd") -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.date(from: self)
+    }
+}
+
+extension Date {
+    func days(from date: Date) -> Int {
+        let calendar = Calendar.current
+        let startDate = self < date ? self : date
+        let endDate = self < date ? date : self
+        
+        let components = calendar.dateComponents([.day], from: startDate, to: endDate)
+        return components.day ?? 0
+    }
+}
+

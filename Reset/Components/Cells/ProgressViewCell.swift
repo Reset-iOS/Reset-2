@@ -47,10 +47,73 @@ class ProgressViewCell: UICollectionViewCell {
         progressView.progress = Float(progress)
         medal.image = UIImage(systemName: "medal.fill")
         medal.tintColor = .black
+        
+        // Change background color based on daysSoberOngoing
+        switch daysSoberOngoing {
+        case 0..<30:
+            progressCardView.backgroundColor = .systemRed // Red for less than 30 days
+        case 30..<90:
+            progressCardView.backgroundColor = .systemYellow // Yellow for 30 to 89 days
+        case 90..<365:
+            progressCardView.backgroundColor = .systemGreen // Green for 90 to 364 days
+        default:
+            progressCardView.backgroundColor = .systemBlue// Blue for 1 year and above
+        }
     }
     
     @IBAction func resetButtonTapped(_ sender: UIButton) {
-        
+        // Show an alert asking if the user wants to reset
+            let alertController = UIAlertController(title: "Confirm Reset", message: "Are you sure you want to reset your sobriety? It's fine to reset and start fresh.", preferredStyle: .alert)
+            
+            // Add a Cancel action
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+            // Add a Reset action
+            alertController.addAction(UIAlertAction(title: "Reset", style: .destructive, handler: { [weak self] _ in
+                self?.resetSobriety()
+            }))
+            
+            // Present the alert
+            if let viewController = self.window?.rootViewController {
+                viewController.present(alertController, animated: true, completion: nil)
+            }
+      }
+    
+    func resetSobriety() {
+            // Get the current user from UserManager
+            guard let currentUser = UserManager.shared.getCurrentUser() else { return }
+            
+            // Update the soberSince date to the current date
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let currentDate = dateFormatter.string(from: Date())
+            
+            // Create a new Contact with updated soberSince date
+            var updatedUser = currentUser
+            updatedUser.soberSince = currentDate
+            
+            // Save the updated user object
+            UserManager.shared.setCurrentUser(updatedUser)
+            
+            
+            // Optionally, notify the user that their reset was successful
+            let successAlert = UIAlertController(title: "Reset Successful", message: "Your sobriety date has been reset.", preferredStyle: .alert)
+            successAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            if let viewController = self.window?.rootViewController {
+                viewController.present(successAlert, animated: true, completion: nil)
+            }
+    }
+      
+      // Helper method to find the parent view controller for presenting the alert
+      private func findViewController() -> UIViewController? {
+          var viewController = self.next
+          while viewController != nil {
+              if let viewController = viewController as? UIViewController {
+                  return viewController
+              }
+              viewController = viewController?.next
+          }
+          return nil
     }
     
 }
