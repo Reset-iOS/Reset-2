@@ -6,8 +6,17 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		406506B02D299D56009C8172 /* MilestoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406506AF2D299D56009C8172 /* MilestoneCell.swift */; };
+		406506B22D2D486E009C8172 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406506B12D2D486E009C8172 /* HomeViewController.swift */; };
+		406506B42D2D48DC009C8172 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406506B32D2D48DC009C8172 /* CircularProgressView.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		2F3F5A2F2CF73ADA00BE954B /* Reset.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reset.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		406506AF2D299D56009C8172 /* MilestoneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneCell.swift; sourceTree = "<group>"; };
+		406506B12D2D486E009C8172 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		406506B32D2D48DC009C8172 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -59,6 +68,9 @@
 		2F3F5A262CF73ADA00BE954B = {
 			isa = PBXGroup;
 			children = (
+				406506B12D2D486E009C8172 /* HomeViewController.swift */,
+				406506B32D2D48DC009C8172 /* CircularProgressView.swift */,
+				406506AF2D299D56009C8172 /* MilestoneCell.swift */,
 				2F3F5A312CF73ADA00BE954B /* Reset */,
 				2F3F5A302CF73ADA00BE954B /* Products */,
 			);
@@ -146,6 +158,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				406506B22D2D486E009C8172 /* HomeViewController.swift in Sources */,
+				406506B02D299D56009C8172 /* MilestoneCell.swift in Sources */,
+				406506B42D2D48DC009C8172 /* CircularProgressView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
